@@ -11,32 +11,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
 
-enum Category {
-    GROCERIES,
-    RESTAURANTS,
-    HOUSE,
-    CAR,
-    VACATION,
-    GIVING,
-    BACKPACKING,
-    THREE_D_PRINTING,
-    CLOTHING,
-    TAXES,
-    MUSIC,
-    PHONE,
-    HAIRCUT,
-    TV,
-    FUN,
-    COFFEE,
-    NIGHTSOUT,
-    EDUCATION
-}
-
-enum TransactionType {
-    DEBIT,
-    CREDIT
-}
-
 @Entity
 @Table(name = "transactions")
 public class Transaction {
