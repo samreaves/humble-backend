@@ -1,6 +1,5 @@
 package com.samreaves.transactions.dto;
 
-import com.samreaves.transactions.entity.Transaction;
 import com.samreaves.transactions.entity.Category;
 import com.samreaves.transactions.entity.TransactionType;
 import java.math.BigDecimal;
