@@ -1,0 +1,68 @@
+{
+	"info": {
+		"_postman_id": "a33c77d8-ccfc-4df1-b585-29598976b83b",
+		"name": "Humble Backend",
+		"description": "Learning Java BE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "97290"
+	},
+	"item": [
+		{
+			"name": "Get Transactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/transactions?type=DEBIT&category=EDUCATION",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"transactions"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "DEBIT"
+						},
+						{
+							"key": "category",
+							"value": "EDUCATION"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Transaction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 45.23,\n    \"description\": \"Dinner at the Companion\",\n    \"category\": \"RESTAURANTS\",\n    \"type\": \"DEBIT\",\n    \"timestamp\": \"2025-11-25T12:15:30\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/transactions",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,43 @@
+# Java Transactions Course compose file
+
+services:
+  postgres:
+    image: 'postgres:latest'
+    container_name: postgres
+    environment:
+      - 'POSTGRES_DB=${POSTGRES_DB:-transactions}'
+      - 'POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-yoursupersecretpassword}'
+      - 'POSTGRES_USER=${POSTGRES_USER:-myuser}'
+    ports:
+      - '${POSTGRES_PORT:-5432}:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    networks:
+      - app-network
+
+
+  transactions-service:
+    build:
+      context: ./transactions-service
+      dockerfile: Dockerfile
+    container_name: transactions-service
+    ports:
+      - "8080:8080"
+    environment:
+      - 'SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL:-jdbc:postgresql://postgres:5432/transactions}'
+      - 'SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME:-myuser}'
+      - 'SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD:-yoursupersecretpassword}'
+      - 'POSTGRES_DB=${POSTGRES_DB:-transactions}'
+    depends_on:
+      - postgres
+    networks:
+      - app-network
+    mem_limit: 768m
+    mem_reservation: 512m
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge
