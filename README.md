@@ -4,13 +4,15 @@ My self taught journey into Java backend services, one feature at a time. This i
 ## Objectives
 My first project will be a Java service that stores transactions in Postgres.
 
-The goal of this project is to learn hands on Java, JPA, Hibernate, Spring Boot, and using Postgres as a database with Java. I will write API endpoints to:
+The goal of this project is to learn hands on Java, JPA, Hibernate, Spring Boot, and using Postgres as a database with Java.
+
+For Phase 1, I will write API endpoints to:
 * get transactions by category
 * get transactions by debit/credit
 * post a new transaction
 
-The second phase will be doing a migration, and learning how to do that properly. It will also show me how to "enrich" the csv data with additional properties.
+For Phase 2, I will set up a test suite using GitHub Actions.
 
-In the third phase, I will create a second service that will need to ingest data from the first service, and learn all that comes with the complexity of ingestion using REST.
+The third phase will be doing a migration, and learning how to do that properly. It will also show me how to "enrich" the csv data with additional properties.
 
-There may be more. This is the first commit.
+In the fourth phase, I will create a second service that will need to ingest data from the first service, and learn all that comes with the complexity of ingestion using REST.
