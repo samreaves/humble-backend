@@ -4,6 +4,7 @@ import com.samreaves.transactions.entity.Transaction;
 import com.samreaves.transactions.entity.Category;
 import com.samreaves.transactions.entity.TransactionType;
 import com.samreaves.transactions.repository.TransactionRepository;
+import com.samreaves.transactions.dto.TransactionCreateRequest;
 
 import org.springframework.lang.NonNull;
 
@@ -71,6 +72,16 @@ public class TransactionTestBuilder {
         transaction.setType(type);
         transaction.setTimestamp(timestamp);
         return transaction;
+    }
+
+    public @NonNull TransactionCreateRequest buildCreateRequest(@NonNull Transaction transaction) {
+        TransactionCreateRequest request = new TransactionCreateRequest();
+        request.setDescription(transaction.getDescription());
+        request.setAmount(transaction.getAmount());
+        request.setCategory(transaction.getCategory());
+        request.setType(transaction.getType());
+        request.setTimestamp(transaction.getTimestamp());
+        return request;
     }
 
     public @NonNull Transaction buildAndSave(TransactionRepository repository) {
