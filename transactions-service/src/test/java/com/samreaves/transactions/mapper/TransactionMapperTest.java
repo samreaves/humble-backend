@@ -1,6 +1,5 @@
 package com.samreaves.transactions.mapper;
 
-import com.samreaves.transactions.mapper.TransactionMapper;
 import com.samreaves.transactions.entity.Transaction;
 import com.samreaves.transactions.dto.TransactionResponse;
 import com.samreaves.transactions.dto.TransactionCreateRequest;
