@@ -126,7 +126,7 @@ public class TransactionControllerTest {
                 {
                     "description": "Mortgage",
                     "category": "HOUSE",
-                    "type": "INVALID",
+                    "type": "DEBIT",
                     "timestamp": "2024-01-01T12:00:00"
                 }
                 """
@@ -206,6 +206,7 @@ public class TransactionControllerTest {
     void shouldReturnBadRequestForGetTransactionsWithInvalidDescription() throws Exception {
     mockMvc.perform(get("/transactions")
             .param("description", "245sgal1403sgsags"))
-        .andExpect(status().isOk());
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.size()").value(0));
     }
 }
