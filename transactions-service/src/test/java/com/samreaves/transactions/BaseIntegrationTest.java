@@ -14,8 +14,7 @@ public abstract class BaseIntegrationTest {
 
     @Container
     @SuppressWarnings("resource") // Container is closed in @AfterAll cleanupContainer()
-    static PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:15-alpine")
-        .withReuse(true);
+    static PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:15-alpine");
 
     @DynamicPropertySource
     static void configureProperties(DynamicPropertyRegistry registry) {
