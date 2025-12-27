@@ -98,4 +98,30 @@ public class TransactionsRepositoryTest extends BaseIntegrationTest {
         assertThat(allTransactions).filteredOn(transaction -> transaction.getType() == TransactionType.CREDIT).hasSize(1);
         assertThat(allTransactions).filteredOn(transaction -> transaction.getType() == TransactionType.DEBIT && transaction.getCategory() == Category.HOUSE).hasSize(1);
     }
+
+    @Test
+    public void shouldSaveAndRetrieveTransactionsByExactDescription() {
+        transactionBuilder().withDescription("Mortgage").buildAndSave(transactionsRepository);
+        transactionBuilder().withDescription("Car Loan").buildAndSave(transactionsRepository);
+        transactionBuilder().withDescription("Credit Card Payment").buildAndSave(transactionsRepository);
+
+        List<Transaction> transactions = transactionsRepository.findAll(TransactionSpecifications.hasDescription("Mortgage"));
+        List<Transaction> allTransactions = transactionsRepository.findAll();
+        assertThat(transactions).hasSize(1);
+        assertThat(allTransactions).hasSize(3);
+    }
+
+    @Test
+    public void shouldSaveAndRetrieveTransactionsByPartialDescription() {
+        transactionBuilder().withDescription("Mortgage").buildAndSave(transactionsRepository);
+        transactionBuilder().withDescription("Car Loan").buildAndSave(transactionsRepository);
+        transactionBuilder().withDescription("Credit Card Payment").buildAndSave(transactionsRepository);
+        transactionBuilder().withDescription("Mortgage Payment").buildAndSave(transactionsRepository);
+        transactionBuilder().withDescription("Mirage").buildAndSave(transactionsRepository);
+
+        List<Transaction> transactions = transactionsRepository.findAll(TransactionSpecifications.hasDescription("Morgage"));
+        List<Transaction> allTransactions = transactionsRepository.findAll();
+        assertThat(transactions).hasSize(2);
+        assertThat(allTransactions).hasSize(5);
+    }
 }

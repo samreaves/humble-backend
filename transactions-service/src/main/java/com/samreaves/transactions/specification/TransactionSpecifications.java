@@ -34,7 +34,15 @@ public class TransactionSpecifications {
         return (root, query, criteriaBuilder) ->
             description == null
                 ? criteriaBuilder.conjunction()
-                : criteriaBuilder.equal(root.get("description"), description);
+                : criteriaBuilder.greaterThan(
+                    criteriaBuilder.function("word_similarity", Double.class, 
+                        criteriaBuilder.literal(description.toLowerCase()),
+                        criteriaBuilder.lower(
+                            root.get("description")
+                        )
+                    ),
+                    0.5
+                );
     }
 
     public static Specification<Transaction> hasTimestamp(LocalDateTime timestamp) {

@@ -1,7 +1,17 @@
 databaseChangeLog:
+  # 1. Enable pg_trgm extension
   - changeSet:
-      id: 001-create-transactions-table
-      author: your-name
+      id: 1-enable-pg-trgm
+      author: Sam Reaves
+      changes:
+        - sql:
+            sql: CREATE EXTENSION IF NOT EXISTS pg_trgm;
+            rollback: DROP EXTENSION IF EXISTS pg_trgm;
+
+  # 2. Create transactions table
+  - changeSet:
+      id: 2-create-transactions-table
+      author: Sam Reaves
       changes:
         - createTable:
             tableName: transactions
@@ -38,3 +48,12 @@ databaseChangeLog:
                   type: TIMESTAMP
                   constraints:
                     nullable: false
+
+  # 3. Add Trigram Index for fast fuzzy searching
+  - changeSet:
+      id: 3-add-trgm-index-to-description
+      author: Sam Reaves
+      changes:
+        - sql:
+            sql: CREATE INDEX trgm_idx_transactions_desc ON transactions USING GIN (description gin_trgm_ops);
+            rollback: DROP INDEX trgm_idx_transactions_desc;
