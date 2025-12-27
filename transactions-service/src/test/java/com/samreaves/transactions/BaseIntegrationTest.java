@@ -14,7 +14,10 @@ public abstract class BaseIntegrationTest {
 
     @Container
     @SuppressWarnings("resource") // Container is closed in @AfterAll cleanupContainer()
-    static PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:15-alpine");
+    static PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:15-alpine")
+            .withDatabaseName(System.getenv().getOrDefault("POSTGRES_DB", "transactions"))
+            .withUsername(System.getenv().getOrDefault("POSTGRES_USER", "myuser"))
+            .withPassword(System.getenv().getOrDefault("POSTGRES_PASSWORD", "yoursupersecretpassword"));
 
     @DynamicPropertySource
     static void configureProperties(DynamicPropertyRegistry registry) {
