@@ -1,10 +1,8 @@
 package com.samreaves.transactions;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class TransactionServiceApplicationTests {
+class TransactionServiceApplicationTests extends BaseIntegrationTest {
 
 	@Test
 	void contextLoads() {
